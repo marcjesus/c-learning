@@ -15,3 +15,7 @@
 11 - PolyMorphism <br>
 12 - Vectors and Iterators <br>
 13 - C++ Checkpoint and challenges <br>
+
+## Runnin C++ in VSCode
+
+For macOS look into : https://code.visualstudio.com/docs/cpp/config-clang-mac
