@@ -69,6 +69,7 @@ std::cout<<*it<<" ";
  for (it = vectorInts.begin(); it != vectorInts.end(); ++it)
 ```
 <br>
+
 ```
 // constructing vectors
 // constructing vectors
@@ -102,3 +103,97 @@ int main ()
 
 Results: 
 vectorInts has 0 elements Adding four elements to the vector vectorInts has 4 elements VectorInts has these elements: 3 3 3 3
+
+## Assign, Push Back, Insert, Emplace and Add elements
+
+### Assign
+Since vectors are instantiated without elements, we need to have a method to add elements. The first method we learned is ::assign.
+
+::Assign will write over elements in the vector, which is what we want in some cases, but in others it is not desired.
+
+### Push Back
+We can add elements to the end (or back) of a vector using ::push_back.
+
+### Insert
+Insert is another method to add elements to a vector.
+
+Insert adds elements to the location after the iterator.
+
+To add elements using insert:
+
+* Set the iterator to one before the location where you would like to add an element.
+* Use insert to add the element.
+This sounds complicated, let's look at an example and you'll see it is fairly straight forward.
+
+In the program below, note the following:
+
+* Before we insert, we need to set the iterator to a known destination. In this case we set it to the beginning of the vector plus one.
+
+```
+ it  = vectorInts.begin() + 1;
+```
+
+* To insert the element we need to give the insert location and the value of the element. In this case the location is the location of the iterator (begin + 1). The value is -1.
+
+```
+vectorInts.insert(it, -1);
+```
+
+Also note in the program below, I reset the iterator to the beginning of the vector before inserting the next value.
+
+You need to do this after an insert because all iterator locations are invalid after an insert.
+
+In this program I set the iterator to the beginning of the vector. Then during the insert I moved the iterator 3 locations to add the next element, which has a value of -2. it = vectorInts.begin(); vectorInts.insert(it + 3, -2);
+
+### Emplace
+
+Another method for adding elements is ::emplace.
+
+Emplace puts an element in a vector at the position pointed to by the iterator.
+
+Emplace differs from insert in the method used to insert the element. Insert copies the values of the vector while emplace does an in-place insertion. This means the insertion occurs at the point after the iterator.
+
+The difference makes emplace more efficient than insert in special cases.
+In the program below, we see the code:
+
+```
+  //insert an element after the first element
+  it  = vectorInts.begin() + 1;
+  vectorInts.emplace(it, -1);
+```
+To use emplace we must first set the iterator to the desired location. In this case, after the first element.
+
+```
+ it  = vectorInts.begin() + 1;
+```
+
+Then we use emplace to add the element.
+
+```
+vectorInts.emplace(it, -1);
+```
+
+## Pop Back
+
+We can remove the last element of a vector using ::pop_back.
+
+For example:
+```
+  //pop the last element off the vector
+  vectorInts.pop_back();
+```
+pop_back DOES NOT return a value!
+
+For example, the code shown below will generate an error message and will not compile.
+```
+ int a; 
+  a = vectorInts.pop_back(); //this line does not compile
+```
+
+You will get an error message telling you ::pop_back has a void value for a return.
+
+```
+main.cpp: In function ‘int main()’:
+main.cpp:39:5: error: void value not ignored as it ought to be
+   a = vectorInts.pop_back();
+```
